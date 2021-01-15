@@ -7,7 +7,7 @@ module.exports = {
 
   parserOptions: {
     tsconfigRootDir: __dirname,
-    sourceType: "module",
+    sourceType: 'module',
   },
 
   parser: '@typescript-eslint/parser',
@@ -171,6 +171,10 @@ module.exports = {
             default: 'array-simple',
           },
         ],
+      },
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+        sourceType: 'module',
       },
     },
     {
