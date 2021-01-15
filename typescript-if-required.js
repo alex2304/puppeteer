@@ -51,6 +51,17 @@ async function compileTypeScriptIfRequired() {
   const libExists = await fileExists(libPath);
   if (libExists) return;
 
+  console.log(__dirname);
+  console.log(process.cwd());
+  fs.readdirSync(__dirname).forEach((file) => {
+    console.log(file);
+  });
+
+  console.log('trying to log src');
+  fs.readdirSync(`${__dirname}/src`).forEach((file) => {
+    console.log(file);
+  });
+
   console.log('Puppeteer:', 'Compiling TypeScript...');
   await compileTypeScript();
 }
