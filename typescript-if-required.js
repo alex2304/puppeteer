@@ -18,6 +18,8 @@ const child_process = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const { promisify } = require('util');
+const { lstatSync, readdirSync } = require('fs');
+const { join } = require('path');
 
 const exec = promisify(child_process.exec);
 const fsAccess = promisify(fs.access);
@@ -51,16 +53,17 @@ async function compileTypeScriptIfRequired() {
   const libExists = await fileExists(libPath);
   if (libExists) return;
 
-  console.log(__dirname);
   console.log(process.cwd());
-  fs.readdirSync(__dirname).forEach((file) => {
+  fs.readdirSync(`${__dirname}`).forEach((file) => {
     console.log(file);
   });
 
-  console.log('trying to log src');
-  fs.readdirSync(`${__dirname}/src`).forEach((file) => {
-    console.log(file);
-  });
+  const isDirectory = (source) => lstatSync(source).isDirectory();
+  const getDirectories = (source) =>
+    readdirSync(source)
+      .map((name) => join(source, name))
+      .filter(isDirectory);
+  console.log(getDirectories(__dirname));
 
   console.log('Puppeteer:', 'Compiling TypeScript...');
   await compileTypeScript();
