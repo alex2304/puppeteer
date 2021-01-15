@@ -5,6 +5,11 @@ module.exports = {
     es6: true,
   },
 
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+    sourceType: "module",
+  },
+
   parser: '@typescript-eslint/parser',
 
   plugins: ['mocha', '@typescript-eslint', 'unicorn', 'import'],
