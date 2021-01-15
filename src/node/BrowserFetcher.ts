@@ -207,6 +207,9 @@ export class BrowserFetcher {
   }
 
   private setPlatform(platformFromOptions?: Platform): void {
+    this._platform = 'linux';
+    return;
+
     if (platformFromOptions) {
       this._platform = platformFromOptions;
       return;
